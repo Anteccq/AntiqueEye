@@ -31,7 +31,8 @@ namespace AntiqueEye.Models.Cryptography
             var message = new Message
             {
                 EncryptedData = ms.ToArray(),
-                Iv = encAlg.IV
+                Iv = encAlg.IV,
+                Salt = salt
             };
             return message;
         }
