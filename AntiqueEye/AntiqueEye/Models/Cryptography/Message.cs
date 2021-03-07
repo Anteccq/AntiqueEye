@@ -10,5 +10,6 @@ namespace AntiqueEye.Models.Cryptography
     {
         public byte[] EncryptedData { get; set; }
         public byte[] Iv { get; set; }
+        public byte[] Salt { get; set; }
     }
 }
