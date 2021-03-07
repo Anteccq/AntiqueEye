@@ -15,7 +15,14 @@ namespace AntiqueEye.Models.Cryptography
 
         public byte[] DecryptAsync(string password, Message message)
         {
-
+            using var deriveBytes = new Rfc2898DeriveBytes(password, message.Salt);
+            using var decAlg = Aes.Create();
+            decAlg.Key = deriveBytes.GetBytes(keySize);
+            decAlg.IV = message.Iv;
+            using var ms = new MemoryStream();
+            using var cs = new CryptoStream(ms, decAlg.CreateDecryptor(), CryptoStreamMode.Write);
+            cs.Write(message.EncryptedData);
+            return ms.ToArray();
         }
 
         public Message EncryptAsync(string password, byte[] rawData)
