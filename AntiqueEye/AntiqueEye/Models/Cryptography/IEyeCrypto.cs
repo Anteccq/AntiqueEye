@@ -8,7 +8,7 @@ namespace AntiqueEye.Models.Cryptography
 {
     public interface IEyeCrypto
     {
-        public byte[] EncryptAsync(string password, Message message);
-        public Message DecryptAsync(string password, byte[] encryptedData);
+        public Message EncryptAsync(string password, byte[] rawData);
+        public byte[] DecryptAsync(string password, Message message);
     }
 }
