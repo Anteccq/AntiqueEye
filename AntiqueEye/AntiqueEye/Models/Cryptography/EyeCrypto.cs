@@ -33,8 +33,7 @@ namespace AntiqueEye.Models.Cryptography
             encAlg.Key = deriveBytes.GetBytes(keySize);
             using var ms = new MemoryStream();
             using var cs = new CryptoStream(ms, encAlg.CreateEncryptor(), CryptoStreamMode.Write);
-            using var binaryWriter = new BinaryWriter(cs);
-            binaryWriter.Write(rawData);
+            cs.Write(rawData);
             var message = new Message
             {
                 EncryptedData = ms.ToArray(),
