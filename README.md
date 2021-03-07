@@ -1,4 +1,4 @@
-# AntiqueEye
+# [WIP] AntiqueEye
 > A password manager for Windows (x86, x64).  
 > It is developed using Win UI 3 pre 4
 
@@ -9,4 +9,4 @@ AntiqueEye has these features
 Other features... will be developed when I feel like it.
 
 
-<<<いつも自分で使ってるパスワード管理の進化版を作りたい。WinFormsからの進化>>>
+<<<いつも自分で使ってるパスワード管理の進化版を作りたい。WinFormsからの進化を！>>>
