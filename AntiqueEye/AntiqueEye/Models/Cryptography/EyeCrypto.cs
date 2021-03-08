@@ -21,8 +21,8 @@ namespace AntiqueEye.Models.Cryptography
             using var decAlg = Aes.Create();
             decAlg.Key = deriveBytes.GetBytes(keySize);
             decAlg.IV = message.Iv;
-            using var ms = new MemoryStream();
-            using var cs = new CryptoStream(ms, decAlg.CreateDecryptor(), CryptoStreamMode.Write);
+            await using var ms = new MemoryStream();
+            await using var cs = new CryptoStream(ms, decAlg.CreateDecryptor(), CryptoStreamMode.Write);
             await cs.WriteAsync(message.EncryptedData, cancellationToken);
             return ms.ToArray();
         }
@@ -34,8 +34,8 @@ namespace AntiqueEye.Models.Cryptography
             var salt = deriveBytes.Salt;
             using var encAlg = Aes.Create();
             encAlg.Key = deriveBytes.GetBytes(keySize);
-            using var ms = new MemoryStream();
-            using var cs = new CryptoStream(ms, encAlg.CreateEncryptor(), CryptoStreamMode.Write);
+            await using var ms = new MemoryStream();
+            await using var cs = new CryptoStream(ms, encAlg.CreateEncryptor(), CryptoStreamMode.Write);
             await cs.WriteAsync(rawData, cancellationToken);
             var message = new Message
             {
