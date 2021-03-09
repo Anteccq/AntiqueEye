@@ -28,6 +28,7 @@ namespace AntiqueEye.Models
             var decryptedData = await _eyeCrypto.DecryptAsync(password, message, cancellationToken);
             await using var ms = new MemoryStream();
             await ms.WriteAsync(decryptedData.AsMemory(0, decryptedData.Length), cancellationToken);
+            ms.Position = 0;
             var blocks = await MessagePackSerializer.DeserializeAsync<List<Block>>(ms, cancellationToken:cancellationToken);
             return blocks;
         }
