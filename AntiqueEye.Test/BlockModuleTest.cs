@@ -44,6 +44,8 @@ namespace AntiqueEye.Test
                 new () {Password = "", SiteName = ""},
             };
 
+            public Message Message { get; set; }
+
             public async Task<Message> ReadAsync(string path, CancellationToken cancellationToken)
             {
                 var data = MessagePackSerializer.Serialize(TestBlocks);
@@ -56,7 +58,7 @@ namespace AntiqueEye.Test
 
             public async Task WriteAsync(string path, Message message, CancellationToken cancellationToken)
             {
-
+                Message = message;
             }
         }
     }
