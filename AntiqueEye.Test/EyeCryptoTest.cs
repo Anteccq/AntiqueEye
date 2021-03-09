@@ -16,9 +16,14 @@ namespace AntiqueEye.Test
         [InlineData("abcdefghijk ", "123456789")]
         [InlineData("AntiqueR ", "Pendulum")]
         [InlineData("", "")]
-        public void EncryptDecryptTest(string rawText, string password)
+        public async Task EncryptDecryptTest(string rawText, string password)
         {
-
+            var rawData = Encoding.UTF8.GetBytes(rawText);
+            var cry = new EyeCrypto();
+            var encrypted = await cry.EncryptAsync(password, rawData);
+            var decryptedData = await cry.DecryptAsync(password, encrypted);
+            var actualText = Encoding.UTF8.GetString(rawData);
+            actualText.Is(rawText);
         }
     }
 }
