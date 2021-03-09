@@ -24,6 +24,7 @@ namespace AntiqueEye.Models.Cryptography
             await using var ms = new MemoryStream();
             await using var cs = new CryptoStream(ms, decAlg.CreateDecryptor(), CryptoStreamMode.Write);
             await cs.WriteAsync(message.EncryptedData, cancellationToken);
+            await cs.FlushFinalBlockAsync(cancellationToken);
             return ms.ToArray();
         }
 
@@ -37,6 +38,7 @@ namespace AntiqueEye.Models.Cryptography
             await using var ms = new MemoryStream();
             await using var cs = new CryptoStream(ms, encAlg.CreateEncryptor(), CryptoStreamMode.Write);
             await cs.WriteAsync(rawData, cancellationToken);
+            await cs.FlushFinalBlockAsync(cancellationToken);
             var message = new Message
             {
                 EncryptedData = ms.ToArray(),
