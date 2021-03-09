@@ -9,8 +9,8 @@ namespace AntiqueEye.Models
 {
     public interface IBlockModule
     {
-        public Task<List<Block>> GetBlocksAsync(CancellationToken cancellationToken = default);
+        public Task<List<Block>> GetBlocksAsync(string password, CancellationToken cancellationToken = default);
 
-        public Task SetBlocksAsync(List<Block> blocks, CancellationToken cancellationToken = default);
+        public Task SetBlocksAsync(string password, List<Block> blocks, CancellationToken cancellationToken = default);
     }
 }
