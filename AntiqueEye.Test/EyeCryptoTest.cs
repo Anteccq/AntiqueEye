@@ -16,7 +16,7 @@ namespace AntiqueEye.Test
         [InlineData("abcdefghijk ", "123456789")]
         [InlineData("AntiqueR ", "Pendulum")]
         [InlineData("", "")]
-        public void EncryptDecryptTest(string rawData, string password)
+        public void EncryptDecryptTest(string rawText, string password)
         {
 
         }
