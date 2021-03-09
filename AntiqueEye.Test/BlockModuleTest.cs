@@ -74,5 +74,17 @@ namespace AntiqueEye.Test
             
             actual.Is(except, (a, b) => a.Password == b.Password && a.SiteName == b.SiteName);
         }
+
+        [Fact]
+        public async Task SetBlockTest()
+        {
+            var eyeCrypto = new TestEyeCrypto();
+            var storage = new TestStorage();
+            var blockModule = new BlockModule(eyeCrypto, storage);
+            await blockModule.SetBlocksAsync("", storage.TestBlocks);
+            var except = MessagePackSerializer.Serialize(storage.TestBlocks);
+            var actual = storage.Message.EncryptedData;
+            actual.Is(except);
+        }
     }
 }
