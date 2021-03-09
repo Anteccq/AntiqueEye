@@ -19,9 +19,10 @@ namespace AntiqueEye.Models
             return message;
         }
 
-        public Task WriteAsync(string path, Message message)
+        public async Task WriteAsync(string path, Message message)
         {
-            throw new NotImplementedException();
+            await using var fs = new FileStream(path, FileMode.Create, FileAccess.Write);
+            await MessagePackSerializer.SerializeAsync(fs, message);
         }
     }
 }
