@@ -37,5 +37,25 @@ namespace AntiqueEye.Test
             result.Iv.Is(message.Iv);
             result.Salt.Is(message.Salt);
         }
+
+        [Fact]
+        public async Task WriteTest()
+        {
+            var path = "./testfile_write";
+            var message = new Message()
+            {
+                EncryptedData = UTF8.GetBytes("EncryptedData"),
+                Iv = UTF8.GetBytes("Iv"),
+                Salt = UTF8.GetBytes("Salt")
+            };
+
+            var sd = new StorageData();
+            await sd.WriteAsync( path, message);
+
+            var result = await sd.ReadAsync(path);
+            result.EncryptedData.Is(message.EncryptedData);
+            result.Iv.Is(message.Iv);
+            result.Salt.Is(message.Salt);
+        }
     }
 }
