@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using AntiqueEye.Models.Cryptography;
@@ -22,7 +23,7 @@ namespace AntiqueEye.Test
             var cry = new EyeCrypto();
             var encrypted = await cry.EncryptAsync(password, rawData);
             var decryptedData = await cry.DecryptAsync(password, encrypted);
-            var actualText = Encoding.UTF8.GetString(rawData);
+            var actualText = Encoding.UTF8.GetString(decryptedData);
             actualText.Is(rawText);
         }
     }
