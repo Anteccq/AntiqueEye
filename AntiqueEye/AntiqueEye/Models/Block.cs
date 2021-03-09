@@ -5,16 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using MessagePack;
 
-namespace AntiqueEye.Models.Cryptography
+namespace AntiqueEye.Models
 {
     [MessagePackObject]
-    public class Message
+    public class Block
     {
         [Key(0)]
-        public byte[] EncryptedData { get; set; }
+        public string SiteName { get; set; }
         [Key(1)]
-        public byte[] Iv { get; set; }
-        [Key(2)]
-        public byte[] Salt { get; set; }
+        public string Password { get; set; }
     }
 }
