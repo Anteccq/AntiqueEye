@@ -14,8 +14,6 @@ namespace AntiqueEye.Models
     {
         public async Task<Message> ReadAsync(string path)
         {
-            if (!File.Exists(path)) throw new FileNotFoundException();
-
             await using var fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             var message = await MessagePackSerializer.DeserializeAsync<Message>(fs);
             return message;
