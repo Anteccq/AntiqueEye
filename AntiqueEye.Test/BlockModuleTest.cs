@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using AntiqueEye.Models;
 using AntiqueEye.Models.Cryptography;
 using MessagePack;
+using Xunit;
 using static System.Text.Encoding;
 
 namespace AntiqueEye.Test
@@ -60,6 +61,18 @@ namespace AntiqueEye.Test
             {
                 Message = message;
             }
+        }
+
+        [Fact]
+        public async Task GetBlockTest()
+        {
+            var eyeCrypto = new TestEyeCrypto();
+            var storage = new TestStorage();
+            var blockModule = new BlockModule(eyeCrypto, storage);
+            var except = storage.TestBlocks;
+            var actual = await blockModule.GetBlocksAsync("");
+            
+            actual.Is(except, (a, b) => a.Password == b.Password && a.SiteName == b.SiteName);
         }
     }
 }
